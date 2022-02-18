@@ -68,18 +68,19 @@ class Game extends GE.GameEngine{
         // goombas.forEach(goomba =>{
         //     this._addEntity(new goomba(g[0], g[1]))
         // })
-
+        this.cubeEntity(new GE.Vector2(-50,70),new GE.Vector2(25,100) ,'purple','cube1');
         //delta tracks time between frames
         //game loop
         this._gameLoop()
     }
-    cubeEntity(position,size,color){
-        const collisionBlock = new GE.Entity (-50, 70, 25, 100);
+    cubeEntity(position,size,color,name){
+        const collisionBlock = new GE.Entity (position.x,position.y, size.x, size.y);
         this._addEntity(collisionBlock);
-        collisionBlock.name = "collisionBlock";
-        collisionBlock._addComponent(new GE.Primitive(new GE.Vector2(25, 100), 'purple', true));
+        collisionBlock.name = name;
+        collisionBlock._addComponent(new GE.Primitive(new GE.Vector2(size.x, size.y), color, true));
         collisionBlock._addComponent(new GE.BoxCollider(this._colliders));
     }
+    
 }
 
 
