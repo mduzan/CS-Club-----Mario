@@ -2,6 +2,7 @@ import * as GE from "./GameEngine.js";
 import PlayerMove from "./Components/playerMove.js";
 import BlockMove from "./Components/blockMove.js";
 
+
 class Game extends GE.GameEngine{
     constructor(canvas){
         super(canvas)
@@ -39,7 +40,7 @@ class Game extends GE.GameEngine{
         this._addEntity(ground);
         ground.name = "ground";
         ground._addComponent(new GE.Primitive(new GE.Vector2(700, 50), 'blue', true));
-        //ground._addComponent(new GE.BoxCollider(this._colliders));
+        ground._addComponent(new GE.BoxCollider(this._colliders));
 
         //add vertical collision block
         // const collisionBlock = new GE.Entity (-50, 70, 25, 100);
@@ -71,6 +72,13 @@ class Game extends GE.GameEngine{
         //delta tracks time between frames
         //game loop
         this._gameLoop()
+    }
+    cubeEntity(position,size,color){
+        const collisionBlock = new GE.Entity (-50, 70, 25, 100);
+        this._addEntity(collisionBlock);
+        collisionBlock.name = "collisionBlock";
+        collisionBlock._addComponent(new GE.Primitive(new GE.Vector2(25, 100), 'purple', true));
+        collisionBlock._addComponent(new GE.BoxCollider(this._colliders));
     }
 }
 

@@ -9,11 +9,11 @@ export default class PlayerMove extends Component{
         this.inputs = [];//new 2/4
 
         //uncomment out later
-        //this.gravityVector = Vector2.DOWN.scalar(5);
+        this.gravityVector = Vector2.DOWN.scalar(5);
 
-        // this.velocity = Vector2.ZERO;
-        // this.move = new Vector2(0,0);
-        // this.jumpVector = new Vector2(0,-4);
+        this.velocity = Vector2.ZERO;
+        this.move = new Vector2(0,0);
+        this.jumpVector = new Vector2(0,-4);
         
 
         document.addEventListener('keydown', e=>{
@@ -44,24 +44,24 @@ export default class PlayerMove extends Component{
                 this.inputs.push(new Vector2(-this.moveSpeed, 0))
                 //this.inputObject.x  = -this.moveSpeed;
                 break;
-            // case "Space": //jump //new 2/4
-            //     this.inputs.push(new Vector2(0, -200))
-            //     break;
+            case "Space": //jump //new 2/4
+                 this.inputs.push(new Vector2(0, -200))
+                 break;
             default:
                 break
         }
         
     }
 
-    // gravity(dMove, delta){
-    //     if (!this.collider.checkCollisions(this.transform.position.add(Vector2.DOWN))){
-    //         //this.inputs.push(new Vector2(0, 1))  //Gravity, but causes lag
-    //         dMove = dMove.add(this.gravityVector);
-    //     }else {
-    //         //this.inputs.push(new Vector2(0, 0))
-    //     }
-    //     return dMove;
-    // }
+    gravity(dMove, delta){
+        if (!this.collider.checkCollisions(this.transform.position.add(Vector2.DOWN))){
+            //this.inputs.push(new Vector2(0, 1))  //Gravity, but causes lag
+            dMove = dMove.add(this.gravityVector);
+        }else {
+            this.inputs.push(new Vector2(0, 0))
+        }
+        return dMove;
+    }
 
     update(delta){
         let dMove = Vector2.ZERO;
@@ -69,13 +69,13 @@ export default class PlayerMove extends Component{
             dMove = dMove.add(this.inputs.shift()) //shift removes first item of an array
         }
 
-        //dMove = this.gravity(dMove,delta);///////////////////////
+        dMove = this.gravity(dMove,delta);///////////////////////
 
         //Currently Working On!!
-        //this.transform.position = this.transform.position.add(this.velocity);//delta
-        //console.log(this.transform.position);
-        //this.velocity = this.velocity * dMove * delta;
-        //console.log(this.transform.position, this.velocity);
+        // this.transform.position = this.transform.position.add(this.velocity);//delta
+        // console.log(this.transform.position);
+        // this.velocity = this.velocity * dMove * delta;
+        // console.log(this.transform.position, this.velocity);
 
         try{
             dMove = dMove.scalar(delta);
@@ -88,9 +88,9 @@ export default class PlayerMove extends Component{
         catch(error){
 
         }
-        //this.transform.position = dMove
-        // this.inputObject.x = 0;//reset input (so it does not keep moving)
-        // this.inputObject.y = 0;
+        this.transform.position = dMove
+        //this.inputObject.x = 0;//reset input (so it does not keep moving)
+        //this.inputObject.y = 0;
     }
 
     // onCollision(col){
