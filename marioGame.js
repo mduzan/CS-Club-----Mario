@@ -69,6 +69,7 @@ class Game extends GE.GameEngine{
         //     this._addEntity(new goomba(g[0], g[1]))
         // })
         this.cubeEntity(new GE.Vector2(-50,70),new GE.Vector2(25,100) ,'purple','cube1');
+        this.cubeEntity(new GE.Vector2(50,70),new GE.Vector2(25,100) ,'purple','cube2');
         //delta tracks time between frames
         //game loop
         this._gameLoop()
